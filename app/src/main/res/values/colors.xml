@@ -13,4 +13,6 @@
     <color name="low_classification">#43A047</color>
     <color name="medium_classification">#F4511E</color>
     <color name="high_classification">#E53935</color>
+    <color name="pass">@color/white</color>
+    <color name="passBackground">@color/colorAccent</color>
 </resources>

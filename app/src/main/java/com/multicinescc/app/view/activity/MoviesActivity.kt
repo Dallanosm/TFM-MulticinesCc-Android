@@ -2,6 +2,8 @@ package com.multicinescc.app.view.activity
 
 import android.graphics.Typeface
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.eftimoff.viewpagertransformers.BackgroundToForegroundTransformer
 import com.github.salomonbrys.kodein.Kodein
@@ -12,6 +14,8 @@ import com.multicinescc.app.R
 import com.multicinescc.app.models.MovieView
 import com.multicinescc.app.presenter.MoviesPresenter
 import com.multicinescc.app.view.adapter.MoviesAdapter
+import com.multicinescc.app.view.adapter.NextPassAdapter
+import com.multicinescc.domain.constants.Constants.Companion.EMPTY_STRING
 import kotlinx.android.synthetic.main.activity_movies.*
 
 class MoviesActivity : RootActivity<MoviesPresenter.View>(), MoviesPresenter.View {
@@ -31,10 +35,14 @@ class MoviesActivity : RootActivity<MoviesPresenter.View>(), MoviesPresenter.Vie
         }
     }
 
+    private val nextPassAdapter = NextPassAdapter()
+
     lateinit var movies: List<MovieView>
 
     override fun initializeUI() {
         movieTitle.typeface = Typeface.createFromAsset(assets, "open-sans-extrabold.ttf")
+        nextPasses.adapter = nextPassAdapter
+        nextPasses.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     }
 
     override fun registerListeners() {
@@ -57,8 +65,12 @@ class MoviesActivity : RootActivity<MoviesPresenter.View>(), MoviesPresenter.Vie
     }
 
     private fun showMovieInfo(index: Int) {
-        movieTitle.text = movies[index].title
-        classification.text = movies[index].classification.split(",")[0]
+        val movie = movies[index]
+        movieTitle.text = movie.title
+        classification.text = movie.classification.split(",")[0]
+        nextPassAdapter.replace(movie.schedule.map { it.time }.toMutableList())
+        val p = movie.schedule.firstOrNull { it.price != EMPTY_STRING }?.price?.split("€")?.let { it[1] }
+        price.text = "$p€"
     }
 
 }
