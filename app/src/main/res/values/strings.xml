@@ -4,4 +4,11 @@
     <string name="default_error">There was an application error</string>
     <string name="price">Precio:</string>
     <string name="next_passes">Próximos pases:</string>
+
+    <string name="sinopsis_test_text">Raquel (Emma Suárez) es una mujer con una complicada situación
+        personal que le lleva a necesitar conseguir con urgencia, en 24 horas, 35.000 euros,
+        conocidos coloquialmente como 70 binladens. Su última esperanza es un préstamo bancario.
+        La irrupción de dos atracadores (Nathalie Poza y Hugo Silva) cuando está a punto de cerrar
+        la transacción lo complica todo. Pero ella no se irá de allí de vacío.
+    </string>
 </resources>
