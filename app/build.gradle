@@ -34,7 +34,11 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'com.eftimoff:android-viewpager-transformers:1.0.1@aar'
+
+    implementation appDependencies.appcompat
+    implementation appDependencies.viewpaggertransformer
+    implementation appDependencies.recycler
+    implementation appDependencies.cardview
 
     implementation appDependencies.glide
 
