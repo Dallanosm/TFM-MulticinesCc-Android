@@ -14,6 +14,7 @@ import com.multicinescc.data.network.NetworkDataSource
 import com.multicinescc.data.network.NetworkRepository
 import com.multicinescc.data.network.createService
 import com.multicinescc.domain.executor.Executor
+import com.multicinescc.domain.interactor.usecase.RetrieveMovieDetailUseCase
 import com.multicinescc.domain.interactor.usecase.RetrieveMoviesUseCase
 import com.multicinescc.domain.repository.MoviesRepository
 
@@ -28,6 +29,7 @@ fun appModule(context: Context) = Kodein.Module {
 
 val domainModule = Kodein.Module {
     bind<RetrieveMoviesUseCase>() with singleton { RetrieveMoviesUseCase(repository = instance(), executor = instance()) }
+    bind<RetrieveMovieDetailUseCase>() with singleton { RetrieveMovieDetailUseCase(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module {

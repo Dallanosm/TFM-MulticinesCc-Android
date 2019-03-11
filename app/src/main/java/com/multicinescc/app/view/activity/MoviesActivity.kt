@@ -2,6 +2,7 @@ package com.multicinescc.app.view.activity
 
 import android.graphics.Typeface
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -12,6 +13,7 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.provider
 import com.multicinescc.app.R
 import com.multicinescc.app.models.MovieView
+import com.multicinescc.app.navigator.navigateToMovieDetailScreen
 import com.multicinescc.app.presenter.MoviesPresenter
 import com.multicinescc.app.view.adapter.MoviesAdapter
 import com.multicinescc.app.view.adapter.NextPassAdapter
@@ -59,7 +61,8 @@ class MoviesActivity : RootActivity<MoviesPresenter.View>(), MoviesPresenter.Vie
 
     override fun showMovies(movies: List<MovieView>) {
         this.movies = movies
-        moviesImages.adapter = MoviesAdapter(this, movies)
+        moviesImages.adapter = MoviesAdapter(context = this, items = movies,
+                onItemClicked = { navigateToMovieDetailScreen(context = this, id = it.id.toLong()) })
         moviesImages.setPageTransformer(true, BackgroundToForegroundTransformer())
         showMovieInfo(0)
     }
@@ -67,10 +70,21 @@ class MoviesActivity : RootActivity<MoviesPresenter.View>(), MoviesPresenter.Vie
     private fun showMovieInfo(index: Int) {
         val movie = movies[index]
         movieTitle.text = movie.title
-        classification.text = movie.classification.split(",")[0]
+        classification.text = movie.classification
+        val classificationValue = movie.classification.replace("+", "").toLongOrNull()
+        if (classificationValue != null && classificationValue >= 13) {
+            if (classificationValue < 18) {
+                classification.background.setTint(ContextCompat.getColor(this, R.color.medium_classification))
+            } else {
+                classification.background.setTint(ContextCompat.getColor(this, R.color.high_classification))
+            }
+        } else {
+            classification.background.setTint(ContextCompat.getColor(this, R.color.low_classification))
+        }
         nextPassAdapter.replace(movie.schedule.map { it.time }.toMutableList())
         val p = movie.schedule.firstOrNull { it.price != EMPTY_STRING }?.price?.split("€")?.let { it[1] }
-        price.text = "$p€"
+                ?: "-"
+        price.text = "$p €"
     }
 
 }

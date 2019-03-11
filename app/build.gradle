@@ -40,6 +40,8 @@ dependencies {
     implementation appDependencies.recycler
     implementation appDependencies.cardview
 
+    implementation "jp.wasabeef:glide-transformations:4.0.0"
+
     implementation appDependencies.glide
 
     implementation appDependencies.permissions

@@ -1,8 +1,11 @@
 package com.multicinescc.app.extension
 
 import android.content.Context
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 
 /**
  * ContextExtensions
@@ -21,6 +24,9 @@ fun Context.toast(textId: Int, length: Int = Toast.LENGTH_LONG) {
 
 fun Context.toPx(dp: Int): Int = resources.getDimensionPixelSize(dp)
 
+fun ImageView.tint(@ColorRes color: Int) {
+    this.setColorFilter(ContextCompat.getColor(context, color), android.graphics.PorterDuff.Mode.SRC_IN)
+}
 
 /**
  * Fragments

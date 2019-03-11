@@ -4,7 +4,6 @@ import com.multicinescc.data.models.CastDto
 import com.multicinescc.data.models.MovieDetailDto
 import com.multicinescc.data.models.MoviesResponseDto
 import com.multicinescc.data.models.ScheduleDto
-import com.multicinescc.domain.constants.Constants.Companion.EMPTY_STRING
 import com.multicinescc.domain.models.Actor
 import com.multicinescc.domain.models.Movie
 import com.multicinescc.domain.models.MovieDetail
@@ -14,7 +13,11 @@ fun MoviesResponseDto.toDomain() = Movie(
         id = id,
         title = title,
         img = img,
-        classification = if (classification.length <= 4) classification else EMPTY_STRING,
+        classification = if (classification.length <= 4) {
+            classification
+        } else {
+            classification.split(",")[0]
+        },
         schedule = schedule.map { it.toDomain() }
 )
 
@@ -32,7 +35,11 @@ fun MovieDetailDto.toDomain() = MovieDetail(
         duration = duration,
         director = director,
         releaseDate = releaseDate,
-        classification = classification,
+        classification = if (classification.length <= 4) {
+            classification
+        } else {
+            classification.split(",")[0]
+        },
         cast = cast.map { it.toDomain() },
         sinopsis = sinopsis,
         trailer = trailer,

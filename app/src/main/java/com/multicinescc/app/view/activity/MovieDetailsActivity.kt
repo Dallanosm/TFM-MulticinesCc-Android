@@ -1,33 +1,92 @@
 package com.multicinescc.app.view.activity
 
+import android.content.Context
+import android.content.Intent
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.bind
+import com.github.salomonbrys.kodein.instance
+import com.github.salomonbrys.kodein.provider
 import com.multicinescc.app.R
+import com.multicinescc.app.extension.load
 import com.multicinescc.app.models.MovieDetailView
 import com.multicinescc.app.presenter.MovieDetailsPresenter
-import com.multicinescc.app.presenter.Presenter
+import com.multicinescc.app.view.adapter.NextPassAdapter
+import jp.wasabeef.glide.transformations.BlurTransformation
+import kotlinx.android.synthetic.main.activity_movie_details.*
+
 
 class MovieDetailsActivity : RootActivity<MovieDetailsPresenter.View>(), MovieDetailsPresenter.View {
 
-    override val progress: View
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-    override val presenter: Presenter<MovieDetailsPresenter.View>
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    companion object {
+        const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
+
+        fun getCallingIntent(context: Context, id: Long): Intent {
+            val intent = Intent(context, MovieDetailsActivity::class.java)
+            intent.putExtra(MOVIE_ID_KEY, id)
+            return intent
+        }
+    }
+
+    override val progress: View by lazy { progressView }
+
+    override val presenter: MovieDetailsPresenter by instance()
+
     override val layoutResourceId: Int = R.layout.activity_movie_details
 
-    override val activityModule: Kodein.Module
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    override val activityModule: Kodein.Module = Kodein.Module {
+        bind<MovieDetailsPresenter>() with provider {
+            MovieDetailsPresenter(
+                    retrieveMovieDetailUseCase = instance(),
+                    view = this@MovieDetailsActivity,
+                    errorHandler = instance()
+            )
+        }
+    }
+
+    private val nextPassAdapter = NextPassAdapter()
 
     override fun initializeUI() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        nextPasses.adapter = nextPassAdapter
+        nextPasses.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     }
 
     override fun registerListeners() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    }
+
+    override fun getMovieId(): Long {
+        return intent?.extras?.getLong(MOVIE_ID_KEY) ?: throw Exception("Id must be not null")
     }
 
     override fun showDetails(movieDetail: MovieDetailView) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        movieTitle.text = movieDetail.title
+        classification.text = movieDetail.classification
+        movieImage.load(movieDetail.image)
+
+        val options = RequestOptions()
+        options.fitCenter()
+
+        Glide.with(background).load(movieDetail.image)
+                .apply(options)
+                .apply(bitmapTransform(BlurTransformation(25, 3)))
+                .into(background)
+
+        sinopsis.text = movieDetail.sinopsis
+        nextPassAdapter.replace(movieDetail.tickets.map { it.time }.toMutableList())
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 }
