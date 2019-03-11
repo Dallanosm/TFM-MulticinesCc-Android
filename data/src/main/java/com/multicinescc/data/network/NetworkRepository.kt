@@ -1,12 +1,8 @@
-package com.multicinescc.domain.repository
+package com.multicinescc.data.network
 
 import com.multicinescc.domain.models.Movie
 import io.reactivex.Single
 
-/**
- * Repository.
- */
-
-interface MoviesRepository {
+interface NetworkRepository {
     fun getMovies(): Single<List<Movie>>
 }

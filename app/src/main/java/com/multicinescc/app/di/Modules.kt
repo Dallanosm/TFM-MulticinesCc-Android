@@ -3,11 +3,19 @@ package com.multicinescc.app.di
 import android.content.Context
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
+import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
-import com.multicinescc.domain.executor.Executor
-import com.multicinescc.app.error.ErrorHandler
 import com.multicinescc.app.error.AndroidErrorHandler
+import com.multicinescc.app.error.ErrorHandler
 import com.multicinescc.app.executor.RxExecutor
+import com.multicinescc.data.MoviesDataSource
+import com.multicinescc.data.network.ApiService
+import com.multicinescc.data.network.NetworkDataSource
+import com.multicinescc.data.network.NetworkRepository
+import com.multicinescc.data.network.createService
+import com.multicinescc.domain.executor.Executor
+import com.multicinescc.domain.interactor.usecase.RetrieveMoviesUseCase
+import com.multicinescc.domain.repository.MoviesRepository
 
 /**
  * Modules
@@ -19,9 +27,17 @@ fun appModule(context: Context) = Kodein.Module {
 }
 
 val domainModule = Kodein.Module {
-    // Add here data dependencies
+    bind<RetrieveMoviesUseCase>() with singleton { RetrieveMoviesUseCase(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module {
-    // Add here data dependencies
+    /* Repositories */
+    bind<MoviesRepository>() with singleton { MoviesDataSource(network = instance()) }
+
+    /* DataSources */
+    bind<NetworkRepository>() with singleton { NetworkDataSource(service = instance()) }
+
+    /* API Service */
+    bind<ApiService>() with singleton { createService<ApiService>(endPoint = ApiService.END_POINT) }
+
 }
