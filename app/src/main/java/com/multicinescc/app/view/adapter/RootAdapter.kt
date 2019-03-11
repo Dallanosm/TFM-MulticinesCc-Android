@@ -1,6 +1,6 @@
 package com.multicinescc.app.view.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import android.view.ViewGroup
 abstract class RootAdapter<T>(protected val items: MutableList<T> = mutableListOf(),
                               private val onItemClickListener: (T) -> Unit = {},
                               private val onLongClickListener: (T) -> Unit = {}
-) : RecyclerView.Adapter<RootAdapter.RootViewHolder<T>>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<RootAdapter.RootViewHolder<T>>() {
 
     abstract val itemLayoutId: Int
 
@@ -72,7 +72,7 @@ abstract class RootAdapter<T>(protected val items: MutableList<T> = mutableListO
 
     abstract class RootViewHolder<in T>(itemView: View,
                                         var onItemClickListener: (Int) -> Unit = {},
-                                        var onLongClickListener: (Int) -> Unit = {}) : RecyclerView.ViewHolder(itemView) {
+                                        var onLongClickListener: (Int) -> Unit = {}) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.setOnClickListener { onItemClickListener(adapterPosition) }

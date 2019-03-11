@@ -1,7 +1,7 @@
 package com.multicinescc.app.view.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +18,7 @@ import com.multicinescc.app.view.activity.RootActivity
 /**
  * RootFragment
  */
-abstract class RootFragment<out V : Presenter.View> : Fragment(), KodeinInjected, Presenter.View {
+abstract class RootFragment<out V : Presenter.View> : androidx.fragment.app.Fragment(), KodeinInjected, Presenter.View {
 
     abstract val presenter: Presenter<V>
 
