@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/background</color>
+    <color name="colorPrimaryDark">@color/background</color>
+    <color name="colorAccent">#F4511E</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="background">#CD000000</color>
+
+    <color name="classification_text">@color/white</color>
+    <color name="movie_title">@color/white</color>
+
+    <color name="low_classification">#43A047</color>
+    <color name="medium_classification">#F4511E</color>
+    <color name="high_classification">#E53935</color>
 </resources>

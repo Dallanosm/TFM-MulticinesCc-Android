@@ -1,8 +1,8 @@
 package com.multicinescc.app.presenter
 
 import com.multicinescc.app.error.ErrorHandler
-import com.multicinescc.app.models.Movie
-import com.multicinescc.data.info
+import com.multicinescc.app.mappers.toView
+import com.multicinescc.app.models.MovieView
 import com.multicinescc.domain.interactor.usecase.RetrieveMoviesUseCase
 
 class MoviesPresenter(private val retrieveMoviesUseCase: RetrieveMoviesUseCase,
@@ -12,8 +12,10 @@ class MoviesPresenter(private val retrieveMoviesUseCase: RetrieveMoviesUseCase,
     override fun initialize() {
         view.showProgress()
         retrieveMoviesUseCase.execute(
-                onSuccess = {
-                    info(it.toString())
+                onSuccess = { movies ->
+                    if (movies.isNotEmpty()) {
+                        view.showMovies(movies.map { it.toView() })
+                    }
                     view.hideProgress()
                 },
                 onError = onError { view.showError(it) }
@@ -33,6 +35,6 @@ class MoviesPresenter(private val retrieveMoviesUseCase: RetrieveMoviesUseCase,
     }
 
     interface View : Presenter.View {
-        fun showMovies(movies: List<Movie>)
+        fun showMovies(movies: List<MovieView>)
     }
 }
