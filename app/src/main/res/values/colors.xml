@@ -15,4 +15,6 @@
     <color name="high_classification">#E53935</color>
     <color name="pass">@color/white</color>
     <color name="passBackground">@color/colorAccent</color>
+    <color name="seeTrailer">@color/colorAccent</color>
+    <color name="seeTrailerText">@color/white</color>
 </resources>

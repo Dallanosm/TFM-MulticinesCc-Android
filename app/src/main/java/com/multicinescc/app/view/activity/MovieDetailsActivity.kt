@@ -64,7 +64,8 @@ class MovieDetailsActivity : RootActivity<MovieDetailsPresenter.View>(), MovieDe
     }
 
     override fun getMovieId(): Long {
-        return intent?.extras?.getLong(MOVIE_ID_KEY) ?: throw Exception("Id must be not null")
+        //return intent?.extras?.getLong(MOVIE_ID_KEY) ?: throw Exception("Id must be not null")
+        return 4311
     }
 
     override fun showDetails(movieDetail: MovieDetailView) {
