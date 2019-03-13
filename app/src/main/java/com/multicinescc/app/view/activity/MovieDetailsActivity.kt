@@ -13,10 +13,14 @@ import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.provider
 import com.multicinescc.app.R
+import com.multicinescc.app.extension.hideMe
 import com.multicinescc.app.extension.load
+import com.multicinescc.app.extension.showMe
 import com.multicinescc.app.models.MovieDetailView
 import com.multicinescc.app.presenter.MovieDetailsPresenter
 import com.multicinescc.app.view.adapter.NextPassAdapter
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
@@ -60,12 +64,12 @@ class MovieDetailsActivity : RootActivity<MovieDetailsPresenter.View>(), MovieDe
     }
 
     override fun registerListeners() {
-
+        seeTrailer.setOnClickListener { presenter.onSeeTrailerClicked() }
     }
 
     override fun getMovieId(): Long {
-        //return intent?.extras?.getLong(MOVIE_ID_KEY) ?: throw Exception("Id must be not null")
-        return 4311
+        return intent?.extras?.getLong(MOVIE_ID_KEY) ?: throw Exception("Id must be not null")
+        //return 4311
     }
 
     override fun showDetails(movieDetail: MovieDetailView) {
@@ -84,6 +88,18 @@ class MovieDetailsActivity : RootActivity<MovieDetailsPresenter.View>(), MovieDe
         sinopsis.text = movieDetail.sinopsis
         nextPassAdapter.replace(movieDetail.tickets.map { it.time }.toMutableList())
     }
+
+    override fun showTrailer(id: String) {
+        lifecycle.addObserver(player)
+        imageContent.hideMe()
+        player.showMe()
+        player.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.loadVideo(id, 0f)
+            }
+        })
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

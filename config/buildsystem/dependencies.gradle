@@ -18,7 +18,7 @@ ext {
 
     //Libraries
     androidxVersion = '1.0.0'
-    supportVersion = '1.0.0-beta01'
+    supportVersion = '1.1.0-alpha01'
     recyclerviewVersion = '1.1.0-alpha01'
     glideVersion = '4.7.1'
     permissionsVersion = '1.1.3'
