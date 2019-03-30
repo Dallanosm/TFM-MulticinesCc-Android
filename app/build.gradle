@@ -5,6 +5,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
     defaultConfig {
         applicationId "com.multicinescc.app"
@@ -30,38 +32,29 @@ android {
 dependencies {
     def appDependencies = rootProject.ext.applicationDependencies
     def appTestDependencies = rootProject.ext.applicationTestDependencies
-
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    implementation "androidx.lifecycle:lifecycle-runtime:2.0.0"
-
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
     implementation appDependencies.appcompat
     implementation appDependencies.viewpaggertransformer
     implementation appDependencies.recycler
     implementation appDependencies.cardview
-
-    implementation "jp.wasabeef:glide-transformations:4.0.0"
+    implementation 'jp.wasabeef:glide-transformations:4.0.0'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.1'
-
-
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
     implementation appDependencies.glide
-
     implementation appDependencies.permissions
-
     implementation appDependencies.kodein
     implementation appDependencies.kodeinAndroid
-
     implementation appDependencies.rxJava
     implementation appDependencies.rxAndroid
-
     testImplementation appTestDependencies.jUnit
     testImplementation appTestDependencies.mockito
-
     androidTestImplementation appTestDependencies.mockitoAndroid
     androidTestImplementation appTestDependencies.espresso
     androidTestImplementation appTestDependencies.espressoCore
-
     implementation project(':domain')
     implementation project(':data')
 }
+apply plugin: 'com.google.gms.google-services'

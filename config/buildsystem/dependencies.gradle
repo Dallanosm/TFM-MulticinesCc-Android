@@ -14,7 +14,7 @@ ext {
     androidTargetSdkVersion = 28
 
     versionCode = 1
-    versionName = "0.0.0"
+    versionName = "0.1.1"
 
     //Libraries
     androidxVersion = '1.0.0'

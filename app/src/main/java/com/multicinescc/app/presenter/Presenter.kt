@@ -1,5 +1,6 @@
 package com.multicinescc.app.presenter
 
+import com.crashlytics.android.Crashlytics
 import com.multicinescc.app.error.ErrorHandler
 
 /**
@@ -20,7 +21,7 @@ abstract class Presenter<out V : Presenter.View>(protected val errorHandler: Err
 
         val message = errorHandler.convert(it as Exception)
 
-//        Crashlytics.logException(it)
+        Crashlytics.logException(it)
         callback(message)
     }
 

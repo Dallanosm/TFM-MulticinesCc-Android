@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "914938033851",
+    "firebase_url": "https://multicinescaceres.firebaseio.com",
+    "project_id": "multicinescaceres",
+    "storage_bucket": "multicinescaceres.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914938033851:android:3f1e5668928ab3fe",
+        "android_client_info": {
+          "package_name": "com.multicinescc.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914938033851-bco9k0vj27071fqdfq47tnq5p8nh2stn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2Dks5Vi6JGGctNxreIFhoyFoqy17gHfQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
