@@ -14,6 +14,7 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.provider
 import com.multicinescc.app.R
 import com.multicinescc.app.extension.load
+import com.multicinescc.app.extension.showMe
 import com.multicinescc.app.models.MovieDetailView
 import com.multicinescc.app.navigator.openVideo
 import com.multicinescc.app.presenter.MovieDetailsPresenter
@@ -87,6 +88,7 @@ class MovieDetailsActivity : RootActivity<MovieDetailsPresenter.View>(), MovieDe
 
         sinopsis.text = movieDetail.sinopsis
         nextPassAdapter.replace(movieDetail.tickets.map { it.time }.toMutableList())
+        seeComments.showMe()
     }
 
     override fun showTrailer(movieUrl: String) {

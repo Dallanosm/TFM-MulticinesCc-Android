@@ -139,7 +139,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/seeTrailer"
-                android:text="@string/see_comments" />
+                android:text="@string/see_comments"
+                android:visibility="gone" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

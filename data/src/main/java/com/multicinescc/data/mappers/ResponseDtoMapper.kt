@@ -16,7 +16,11 @@ fun MoviesResponseDto.toDomain() = Movie(
         classification = if (classification.length <= 4) {
             classification
         } else {
-            classification.split(",")[0]
+            if (classification.toLowerCase().contains("apta")) {
+                "Apta" //Fixme
+            } else {
+                classification.split(",")[0]
+            }
         },
         schedule = schedule.map { it.toDomain() }
 )
@@ -38,7 +42,11 @@ fun MovieDetailDto.toDomain() = MovieDetail(
         classification = if (classification.length <= 4) {
             classification
         } else {
-            classification.split(",")[0]
+            if (classification.toLowerCase().contains("apta")) {
+                "Apta" //Fixme
+            } else {
+                classification.split(",")[0]
+            }
         },
         cast = cast.map { it.toDomain() },
         sinopsis = sinopsis,
