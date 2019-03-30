@@ -42,7 +42,6 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:4.0.0'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.1'
     implementation 'com.google.firebase:firebase-core:16.0.1'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
     implementation appDependencies.glide
     implementation appDependencies.permissions
     implementation appDependencies.kodein
