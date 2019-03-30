@@ -13,14 +13,12 @@ import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.provider
 import com.multicinescc.app.R
-import com.multicinescc.app.extension.hideMe
 import com.multicinescc.app.extension.load
-import com.multicinescc.app.extension.showMe
 import com.multicinescc.app.models.MovieDetailView
+import com.multicinescc.app.navigator.openVideo
 import com.multicinescc.app.presenter.MovieDetailsPresenter
 import com.multicinescc.app.view.adapter.NextPassAdapter
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.multicinescc.app.view.dialog.CommentsDialog
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
@@ -28,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_movie_details.*
 class MovieDetailsActivity : RootActivity<MovieDetailsPresenter.View>(), MovieDetailsPresenter.View {
 
     companion object {
+        const val DIALOG_TAG = "DIALOG"
         const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
 
         fun getCallingIntent(context: Context, id: Long): Intent {
@@ -65,6 +64,7 @@ class MovieDetailsActivity : RootActivity<MovieDetailsPresenter.View>(), MovieDe
 
     override fun registerListeners() {
         seeTrailer.setOnClickListener { presenter.onSeeTrailerClicked() }
+        seeComments.setOnClickListener { presenter.onSeeComments() }
     }
 
     override fun getMovieId(): Long {
@@ -89,15 +89,22 @@ class MovieDetailsActivity : RootActivity<MovieDetailsPresenter.View>(), MovieDe
         nextPassAdapter.replace(movieDetail.tickets.map { it.time }.toMutableList())
     }
 
-    override fun showTrailer(id: String) {
-        lifecycle.addObserver(player)
-        imageContent.hideMe()
-        player.showMe()
-        player.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                youTubePlayer.loadVideo(id, 0f)
-            }
-        })
+    override fun showTrailer(movieUrl: String) {
+        openVideo(this, videoURL = movieUrl)
+
+        /*   lifecycle.addObserver(player)
+           imageContent.hideMe()
+           player.showMe()
+           player.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+               override fun onReady(youTubePlayer: YouTubePlayer) {
+                   youTubePlayer.loadVideo(id, 0f)
+               }
+           })*/
+    }
+
+    override fun navigateToCommentsScreen(id: Long) {
+        val commentsDialog = CommentsDialog.newInstance(id)
+        commentsDialog.show(supportFragmentManager, DIALOG_TAG)
     }
 
 

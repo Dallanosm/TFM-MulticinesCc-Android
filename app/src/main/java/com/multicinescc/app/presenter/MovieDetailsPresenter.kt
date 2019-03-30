@@ -37,12 +37,18 @@ class MovieDetailsPresenter(private val retrieveMovieDetailUseCase: RetrieveMovi
     }
 
     fun onSeeTrailerClicked() {
-        view.showTrailer(movie.trailer.split("embed/")[1])
+        //  view.showTrailer(movie.trailer.split("embed/")[1])
+        view.showTrailer(movie.trailer.replace("embed/", "watch?v="))
+    }
+
+    fun onSeeComments() {
+        view.navigateToCommentsScreen(view.getMovieId())
     }
 
     interface View : Presenter.View {
         fun getMovieId(): Long
         fun showDetails(movieDetail: MovieDetailView)
-        fun showTrailer(id: String)
+        fun showTrailer(movieUrl: String)
+        fun navigateToCommentsScreen(id: Long)
     }
 }

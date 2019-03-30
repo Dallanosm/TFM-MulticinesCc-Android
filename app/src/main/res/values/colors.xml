@@ -17,4 +17,6 @@
     <color name="passBackground">@color/colorAccent</color>
     <color name="seeTrailer">@color/colorAccent</color>
     <color name="seeTrailerText">@color/white</color>
+    <color name="toolbarTitleTextColor">@color/white</color>
+    <color name="toolbarBackground">#292929</color>
 </resources>
