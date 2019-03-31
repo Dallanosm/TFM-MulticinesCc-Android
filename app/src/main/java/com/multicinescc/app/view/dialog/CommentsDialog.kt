@@ -1,6 +1,8 @@
 package com.multicinescc.app.view.dialog
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
@@ -11,6 +13,7 @@ import com.multicinescc.app.extension.showMe
 import com.multicinescc.app.extension.toast
 import com.multicinescc.app.models.CommentView
 import com.multicinescc.app.presenter.CommentsPresenter
+import com.multicinescc.app.view.adapter.CommentsAdapter
 import kotlinx.android.synthetic.main.dialog_comments.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 
@@ -43,8 +46,13 @@ class CommentsDialog : RootDialog<CommentsPresenter.View>(), CommentsPresenter.V
         }
     }
 
+    private val adapter = CommentsAdapter()
+
     override fun initializeUI() {
         toolbarTitle.text = getString(R.string.comments)
+
+        commentsView.adapter = adapter
+        commentsView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
     }
 
     override fun registerListeners() {
@@ -66,9 +74,7 @@ class CommentsDialog : RootDialog<CommentsPresenter.View>(), CommentsPresenter.V
     override fun showComments(comments: List<CommentView>) {
         emptyContentView.hideMe()
         commentsView.showMe()
-        comments.forEach {
-            showMessage("EO ${it.value}")
-        }
+        adapter.replace(comments.toMutableList())
     }
 
     override fun showEmptyContentView() {
