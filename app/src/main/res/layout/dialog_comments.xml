@@ -13,18 +13,20 @@
         <include layout="@layout/view_toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/comments"
+            android:id="@+id/commentsView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/emptyContentView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="invisible">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <EditText
                 android:id="@+id/newCommentValue"

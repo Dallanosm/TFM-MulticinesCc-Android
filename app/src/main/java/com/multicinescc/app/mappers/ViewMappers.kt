@@ -1,13 +1,9 @@
 package com.multicinescc.app.mappers
 
-import com.multicinescc.app.models.ActorView
-import com.multicinescc.app.models.MovieDetailView
-import com.multicinescc.app.models.MovieView
-import com.multicinescc.app.models.ScheduleView
-import com.multicinescc.domain.models.Actor
-import com.multicinescc.domain.models.Movie
-import com.multicinescc.domain.models.MovieDetail
-import com.multicinescc.domain.models.Schedule
+import com.multicinescc.app.models.*
+import com.multicinescc.data.toFormattedString
+import com.multicinescc.domain.constants.Constants.Companion.DATE_FORMAT
+import com.multicinescc.domain.models.*
 
 fun Movie.toView() = MovieView(
         id = id,
@@ -41,4 +37,10 @@ fun MovieDetail.toView() = MovieDetailView(
 fun Actor.toView() = ActorView(
         name = name,
         image = image
+)
+
+fun Comment.toView() = CommentView(
+        id = id,
+        createdDate = createdDate.toFormattedString(DATE_FORMAT),
+        value = value
 )

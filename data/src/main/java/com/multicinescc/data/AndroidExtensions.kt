@@ -1,6 +1,8 @@
 package com.multicinescc.data
 
 import android.util.Log
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * AndroidExtensions
@@ -36,3 +38,5 @@ fun Any.debug(text: String) {
 fun Any.debug(text: String, exception: Exception) {
     Log.d(this::class.java.simpleName, text, exception)
 }
+
+fun Date.toFormattedString(format: String): String = SimpleDateFormat(format).format(this)

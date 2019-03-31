@@ -20,6 +20,8 @@ class Constants {
             BuildType.DEBUG -> "t21_debug"
             BuildType.RELEASE -> "t21"
         }
+
+        const val DATE_FORMAT = "dd-MM-yyyy HH:mm"
     }
 }
 

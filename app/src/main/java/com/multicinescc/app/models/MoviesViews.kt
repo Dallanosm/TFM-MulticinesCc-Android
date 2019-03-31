@@ -34,3 +34,9 @@ data class ScheduleView(
         val paymentUrl: String,
         val price: String
 )
+
+data class CommentView(
+        val id: Long,
+        val createdDate: String,
+        val value: String
+)

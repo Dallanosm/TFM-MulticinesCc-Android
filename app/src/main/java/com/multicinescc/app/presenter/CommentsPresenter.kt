@@ -1,14 +1,30 @@
 package com.multicinescc.app.presenter
 
 import com.multicinescc.app.error.ErrorHandler
+import com.multicinescc.app.mappers.toView
+import com.multicinescc.app.models.CommentView
+import com.multicinescc.domain.interactor.usecase.RetrieveCommentsByMovieUseCase
 
-class CommentsPresenter(view: CommentsPresenter.View, errorHandler: ErrorHandler) :
+class CommentsPresenter(private val retrieveCommentsByMovieUseCase: RetrieveCommentsByMovieUseCase,
+                        view: CommentsPresenter.View, errorHandler: ErrorHandler) :
         Presenter<CommentsPresenter.View>(view = view, errorHandler = errorHandler) {
 
-    val movieId by lazy { view.getMovieId() }
+    private val movieId by lazy { view.getMovieId() }
 
     override fun initialize() {
         view.showProgress()
+        retrieveCommentsByMovieUseCase.execute(
+                movieId = movieId,
+                onSuccess = { comments ->
+                    if (comments.isNotEmpty()) {
+                        view.showComments(comments.map { it.toView() })
+                    } else {
+                        view.showEmptyContentView()
+                    }
+                    view.hideProgress()
+                },
+                onError = onError { view.showError(it) }
+        )
     }
 
     override fun resume() {
@@ -16,7 +32,7 @@ class CommentsPresenter(view: CommentsPresenter.View, errorHandler: ErrorHandler
     }
 
     override fun stop() {
-        // Nothing to do yet
+        retrieveCommentsByMovieUseCase.clear()
     }
 
     override fun destroy() {
@@ -33,7 +49,7 @@ class CommentsPresenter(view: CommentsPresenter.View, errorHandler: ErrorHandler
 
     interface View : Presenter.View {
         fun getMovieId(): Long
-        fun showComments()
+        fun showComments(comments: List<CommentView>)
         fun showEmptyContentView()
         fun finish()
     }
