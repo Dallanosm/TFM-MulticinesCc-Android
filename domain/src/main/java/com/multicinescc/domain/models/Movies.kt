@@ -1,5 +1,7 @@
 package com.multicinescc.domain.models
 
+import java.util.*
+
 
 data class Movie(
         val id: String,
@@ -33,4 +35,11 @@ data class Schedule(
         val time: String,
         val paymentUrl: String,
         val price: String
+)
+
+
+data class Comment(
+        val id: Long,
+        val createdDate: Date,
+        val value: String
 )

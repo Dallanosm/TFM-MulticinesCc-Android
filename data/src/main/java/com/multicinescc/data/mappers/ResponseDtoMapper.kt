@@ -1,13 +1,8 @@
 package com.multicinescc.data.mappers
 
-import com.multicinescc.data.models.CastDto
-import com.multicinescc.data.models.MovieDetailDto
-import com.multicinescc.data.models.MoviesResponseDto
-import com.multicinescc.data.models.ScheduleDto
-import com.multicinescc.domain.models.Actor
-import com.multicinescc.domain.models.Movie
-import com.multicinescc.domain.models.MovieDetail
-import com.multicinescc.domain.models.Schedule
+import com.multicinescc.data.models.*
+import com.multicinescc.domain.models.*
+import java.util.*
 
 fun MoviesResponseDto.toDomain() = Movie(
         id = id,
@@ -57,4 +52,10 @@ fun MovieDetailDto.toDomain() = MovieDetail(
 fun CastDto.toDomain() = Actor(
         name = name,
         image = image
+)
+
+fun MoviesCommentDto.toDomain() = Comment(
+        id = id,
+        createdDate = Date(createdDate),
+        value = value
 )

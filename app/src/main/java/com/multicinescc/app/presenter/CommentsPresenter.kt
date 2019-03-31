@@ -5,8 +5,10 @@ import com.multicinescc.app.error.ErrorHandler
 class CommentsPresenter(view: CommentsPresenter.View, errorHandler: ErrorHandler) :
         Presenter<CommentsPresenter.View>(view = view, errorHandler = errorHandler) {
 
+    val movieId by lazy { view.getMovieId() }
+
     override fun initialize() {
-        // Nothing to do yet
+        view.showProgress()
     }
 
     override fun resume() {
@@ -22,7 +24,7 @@ class CommentsPresenter(view: CommentsPresenter.View, errorHandler: ErrorHandler
     }
 
     fun addComment(text: String) {
-        // Not implemented yet
+        view.showProgress()
     }
 
     fun onCloseClick() {
@@ -30,6 +32,7 @@ class CommentsPresenter(view: CommentsPresenter.View, errorHandler: ErrorHandler
     }
 
     interface View : Presenter.View {
+        fun getMovieId(): Long
         fun showComments()
         fun showEmptyContentView()
         fun finish()

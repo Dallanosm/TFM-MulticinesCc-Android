@@ -36,3 +36,9 @@ data class CastDto(
         @SerializedName("image") val image: String,
         @SerializedName("name") val name: String
 )
+
+data class MoviesCommentDto(
+        @SerializedName("id") val id: Long,
+        @SerializedName("createdDate") val createdDate: Long,
+        @SerializedName("value") val value: String
+)

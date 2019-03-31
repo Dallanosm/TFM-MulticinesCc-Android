@@ -39,6 +39,10 @@ class CommentsDialog : RootDialog<CommentsPresenter.View>(), CommentsPresenter.V
         close.setOnClickListener { presenter.onCloseClick() }
     }
 
+    override fun getMovieId(): Long = arguments?.getLong(MOVIE_ID)
+            ?: throw IllegalArgumentException("Movie id must be long")
+
+
     override fun showProgress() = progressView.showMe()
     override fun hideProgress() = progressView.hideMe()
 
