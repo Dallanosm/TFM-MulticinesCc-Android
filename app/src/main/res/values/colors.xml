@@ -5,6 +5,7 @@
     <color name="colorAccent">#F4511E</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="red">#E53935</color>
     <color name="background">#CD000000</color>
 
     <color name="classification_text">@color/white</color>

@@ -18,4 +18,6 @@
     <string name="comments_not_implemented">Aún no se ha implementado esta funcionalidad.</string>
     <string name="empty_comments_symbol">ಥ_ಥ</string>
     <string name="anonymous">Anónimo</string>
+    <string name="no_comments">No hay ningún comentario. ¡Anímate y deja tu opinión!</string>
+    <string name="new_comment">Añade tu comentario aquí.</string>
 </resources>
