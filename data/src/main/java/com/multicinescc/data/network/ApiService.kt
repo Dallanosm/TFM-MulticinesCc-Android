@@ -3,8 +3,11 @@ package com.multicinescc.data.network
 import com.multicinescc.data.models.MovieDetailDto
 import com.multicinescc.data.models.MoviesCommentDto
 import com.multicinescc.data.models.MoviesResponseDto
+import com.multicinescc.data.models.NewCommentDto
 import io.reactivex.Single
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiService {
@@ -22,7 +25,8 @@ interface ApiService {
     @GET("movies/{movieId}/comments")
     fun getComments(@Path("movieId") movieId: Long): Single<List<MoviesCommentDto>>
 
-    //   @POST("movies/{movieId}/comments")
-    //  fun addNewComment(@Path("movieId") movieId: Long): Single<MoviesCommentDto>
+    @POST("movies/{movieId}/comments")
+    fun addNewComment(@Path("movieId") movieId: Long,
+                      @Body newComment: NewCommentDto): Single<List<MoviesCommentDto>>
 
 }

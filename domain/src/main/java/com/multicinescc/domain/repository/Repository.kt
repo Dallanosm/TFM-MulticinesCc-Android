@@ -13,4 +13,5 @@ interface MoviesRepository {
     fun getMovies(): Single<List<Movie>>
     fun getMovie(id: Long): Single<MovieDetail>
     fun getComments(movieId: Long): Single<List<Comment>>
+    fun addNewComment(newComment: String, movieId: Long): Single<List<Comment>>
 }

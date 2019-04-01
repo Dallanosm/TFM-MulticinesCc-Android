@@ -17,6 +17,7 @@ import com.multicinescc.domain.executor.Executor
 import com.multicinescc.domain.interactor.usecase.RetrieveCommentsByMovieUseCase
 import com.multicinescc.domain.interactor.usecase.RetrieveMovieDetailUseCase
 import com.multicinescc.domain.interactor.usecase.RetrieveMoviesUseCase
+import com.multicinescc.domain.interactor.usecase.SendNewCommenUseCase
 import com.multicinescc.domain.repository.MoviesRepository
 
 /**
@@ -32,6 +33,7 @@ val domainModule = Kodein.Module {
     bind<RetrieveMoviesUseCase>() with singleton { RetrieveMoviesUseCase(repository = instance(), executor = instance()) }
     bind<RetrieveMovieDetailUseCase>() with singleton { RetrieveMovieDetailUseCase(repository = instance(), executor = instance()) }
     bind<RetrieveCommentsByMovieUseCase>() with singleton { RetrieveCommentsByMovieUseCase(repository = instance(), executor = instance()) }
+    bind<SendNewCommenUseCase>() with singleton { SendNewCommenUseCase(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module {

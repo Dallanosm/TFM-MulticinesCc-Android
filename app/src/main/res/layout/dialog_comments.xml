@@ -52,51 +52,57 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
+            android:backgroundTint="@color/toolbarBackground"
+            android:elevation="4dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/commentLabel"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_weight="1"
-                android:textColorHint="@color/white"
-                app:counterEnabled="true"
-                app:counterMaxLength="300"
-                app:counterOverflowTextAppearance="@style/CounterOverflowStyle"
-                app:counterTextAppearance="@style/CounterStyle"
-                app:errorTextAppearance="@style/EditTextErrorAppearance">
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
 
-                <EditText
-                    android:id="@+id/comment"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/commentLabel"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:hint="@string/new_comment"
-                    android:maxLength="300"
-                    android:textColor="@color/white" />
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:textColorHint="@color/white"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="200"
+                    app:counterOverflowTextAppearance="@style/CounterOverflowStyle"
+                    app:counterTextAppearance="@style/CounterStyle"
+                    app:errorTextAppearance="@style/EditTextErrorAppearance">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/newComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:hint="@string/new_comment"
+                        android:maxLength="200"
+                        android:textColor="@color/white" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/addNewComment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="8dp"
-                android:src="@android:drawable/ic_menu_send"
-                android:tint="@color/white"
-                app:fabSize="normal" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/addNewComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="8dp"
+                    android:src="@android:drawable/ic_menu_send"
+                    android:tint="@color/white"
+                    app:fabSize="normal" />
 
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
     <include

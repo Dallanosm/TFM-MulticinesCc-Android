@@ -14,6 +14,7 @@ import com.multicinescc.app.extension.toast
 import com.multicinescc.app.models.CommentView
 import com.multicinescc.app.presenter.CommentsPresenter
 import com.multicinescc.app.view.adapter.CommentsAdapter
+import com.multicinescc.domain.constants.Constants.Companion.EMPTY_STRING
 import kotlinx.android.synthetic.main.dialog_comments.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 
@@ -41,6 +42,7 @@ class CommentsDialog : RootDialog<CommentsPresenter.View>(), CommentsPresenter.V
         bind<CommentsPresenter>() with provider {
             CommentsPresenter(
                     retrieveCommentsByMovieUseCase = instance(),
+                    sendNewCommenUseCase = instance(),
                     view = this@CommentsDialog,
                     errorHandler = instance())
         }
@@ -57,6 +59,7 @@ class CommentsDialog : RootDialog<CommentsPresenter.View>(), CommentsPresenter.V
 
     override fun registerListeners() {
         close.setOnClickListener { presenter.onCloseClick() }
+        addNewComment.setOnClickListener { presenter.addComment(newComment.text.toString()) }
     }
 
     override fun getMovieId(): Long = arguments?.getLong(MOVIE_ID)
@@ -82,8 +85,8 @@ class CommentsDialog : RootDialog<CommentsPresenter.View>(), CommentsPresenter.V
         commentsView.hideMe()
     }
 
-    override fun finish() {
-        dismiss()
-    }
+    override fun clearNewCommentInput() = newComment.setText(EMPTY_STRING)
+
+    override fun finish() = dismiss()
 
 }

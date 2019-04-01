@@ -14,4 +14,7 @@ class MoviesDataSource(private val network: NetworkRepository) : MoviesRepositor
     override fun getMovie(id: Long): Single<MovieDetail> = network.getMovie(id = id)
 
     override fun getComments(movieId: Long): Single<List<Comment>> = network.getComments(movieId)
+
+    override fun addNewComment(newComment: String, movieId: Long): Single<List<Comment>> =
+            network.addNewComment(newComment = newComment, movieId = movieId)
 }

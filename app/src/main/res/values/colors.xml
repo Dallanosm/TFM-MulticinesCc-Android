@@ -20,4 +20,5 @@
     <color name="seeTrailerText">@color/white</color>
     <color name="toolbarTitleTextColor">@color/white</color>
     <color name="toolbarBackground">#292929</color>
+    <color name="commentBackground">#3D3D3D</color>
 </resources>
