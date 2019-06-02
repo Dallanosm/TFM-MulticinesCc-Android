@@ -32,12 +32,12 @@ ext {
     crashlyticsVersion = '2.7.1'
 
     //Testing
-    robolectricVersion = '3.0'
+    robolectricVersion = '3.3'
     jUnitVersion = '4.+'
     mockitoVersion = '2.+'
-    mockitoKotlinVersion = '1.5.0'
-    espressoVersion = '1.1.0-alpha4'
-    espressoCoreVersion = '3.1.0-alpha4'
+    mockitoKotlinVersion = '2.0.0-RC1'
+    espressoVersion = '1.0.'
+    espressoCoreVersion = '3.0.2'
 
     //Kotlin
     kodeinVersion = '4.1.0'
@@ -62,10 +62,10 @@ ext {
             jUnit          : "junit:junit:${jUnitVersion}",
             mockito        : "org.mockito:mockito-inline:${mockitoVersion}",
             mockitoAndroid : "org.mockito:mockito-android:${mockitoVersion}",
-            mockitoKotlin  : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            mockitoKotlin  : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}",
             roboelectric   : "org.robolectric:robolectric:${robolectricVersion}",
-            espressoCore   : "androidx.test.espresso:espresso-core:${espressoCoreVersion}",
-            espresso       : "androidx.test:runner:${espressoVersion}",
+            espressoCore   : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
+            espresso       : "com.android.support.test:runner:${espressoVersion}",
             espressoContrib: "com.android.support.test.espresso:espresso-contrib:${espressoCoreVersion}"
     ]
 

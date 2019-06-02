@@ -52,6 +52,7 @@ dependencies {
     implementation appDependencies.rxAndroid
     testImplementation appTestDependencies.jUnit
     testImplementation appTestDependencies.mockito
+    testImplementation appTestDependencies.mockitoKotlin
     androidTestImplementation appTestDependencies.mockitoAndroid
     androidTestImplementation appTestDependencies.espresso
     androidTestImplementation appTestDependencies.espressoCore

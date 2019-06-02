@@ -11,6 +11,7 @@ class MovieDetailsPresenter(private val retrieveMovieDetailUseCase: RetrieveMovi
         Presenter<MovieDetailsPresenter.View>(view = view, errorHandler = errorHandler) {
 
     lateinit var movie: MovieDetail
+
     override fun initialize() {
         view.showProgress()
         retrieveMovieDetailUseCase.execute(

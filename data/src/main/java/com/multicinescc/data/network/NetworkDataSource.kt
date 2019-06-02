@@ -10,8 +10,7 @@ import io.reactivex.Single
 class NetworkDataSource(private val service: ApiService) : NetworkRepository {
 
     override fun getMovies(): Single<List<Movie>> =
-            service.getMovies()
-                    .map { movies ->
+            service.getMovies().map { movies ->
                         movies.map { movie ->
                             movie.toDomain()
                         }
